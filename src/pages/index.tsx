@@ -10,22 +10,44 @@ interface Props {
 
 export default function Home({ users, page }: Props) {
   return (
-    <div style={{ padding: "1rem" }}>
-      <h1>Usuários - Página {page}</h1>
-      <Link href="/add-user">➕ Adicionar Usuário</Link>
-      <ul>
+    <div className="max-w-4xl mx-auto p-6">
+      <h1 className="text-3xl font-bold mb-6">Users - Page {page}</h1>
+
+      <Link
+        href="/add-user"
+        className="inline-block mb-6 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+      >
+        ➕ Add User
+      </Link>
+
+      <ul className="space-y-4">
         {users.map((user) => (
           <li key={user.id}>
-            <Link href={`/users/${user.id}`}>{user.name}</Link>
+            <Link
+              href={`/users/${user.id}`}
+              className="block p-4 border rounded-lg shadow hover:bg-gray-50 transition"
+            >
+              {user.name}
+            </Link>
           </li>
         ))}
       </ul>
-      <div style={{ marginTop: "1rem" }}>
-        <Link href={`/?page=${page - 1}`} style={{ marginRight: 10 }} scroll={false}>
-          {page > 1 && "⬅️ Anterior"}
-        </Link>
-        <Link href={`/?page=${page + 1}`} scroll={false}>
-          ➡️ Próxima
+
+      <div className="mt-8 flex justify-between">
+        {page > 1 ? (
+          <Link
+            href={`/?page=${page - 1}`}
+            className="text-blue-600 hover:underline"
+          >
+            ⬅️ Previous
+          </Link>
+        ) : <div />}
+
+        <Link
+          href={`/?page=${page + 1}`}
+          className="text-blue-600 hover:underline"
+        >
+          Next ➡️
         </Link>
       </div>
     </div>
