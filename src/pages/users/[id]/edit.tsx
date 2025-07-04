@@ -1,7 +1,7 @@
 import { GetServerSideProps } from "next"
-import { getUserById } from "@/services/userService"
+import { getUserById, updateUser } from "@/services/userService"
 import { User } from "@/types/User"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/router"
 import Link from "next/link"
 
@@ -12,6 +12,40 @@ interface Props {
 export default function EditUser({ user }: Props) {
   const router = useRouter()
 
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [phone, setPhone] = useState("")
+  const [website, setWebsite] = useState("")
+
+  useEffect(() => {
+    if (user) {
+      setName(user.name)
+      setEmail(user.email)
+      setPhone(user.phone)
+      setWebsite(user.website ?? "")
+    }
+  }, [user])
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+
+    if (!user) return
+
+    const updated = updateUser(user.id, {
+      name,
+      email,
+      phone,
+      website,
+    })
+
+    if (updated) {
+      alert("User updated successfully!")
+      router.push(`/users/${user.id}`)
+    } else {
+      alert("Failed to update user.")
+    }
+  }
+
   if (!user) {
     return (
       <div className="p-6">
@@ -19,29 +53,6 @@ export default function EditUser({ user }: Props) {
         <Link href="/">⬅ Back</Link>
       </div>
     )
-  }
-
-  const [name, setName] = useState(user.name)
-  const [email, setEmail] = useState(user.email)
-  const [phone, setPhone] = useState(user.phone)
-  const [website, setWebsite] = useState(user.website ?? "")
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-
-    // Simulate saving (you can update the mock data if desired)
-    console.log("Saving user:", {
-      id: user.id,
-      name,
-      email,
-      phone,
-      website,
-    })
-
-    alert("User updated successfully (simulated)")
-
-    // Redirect back to user detail
-    router.push(`/users/${user.id}`)
   }
 
   return (

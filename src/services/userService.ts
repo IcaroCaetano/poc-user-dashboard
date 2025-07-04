@@ -14,7 +14,6 @@ const getRandomAvatar = (id: number) =>
 
 export const getUsers = (page = 1, limit = 5): User[] => {
   const start = (page - 1) * limit
-  // Include avatar field when returning users
   return mockUsers
     .slice(start, start + limit)
     .map(user => ({ ...user, avatar: getRandomAvatar(user.id) }))
@@ -23,7 +22,6 @@ export const getUsers = (page = 1, limit = 5): User[] => {
 export const getUserById = (id: number): User | undefined => {
   const user = mockUsers.find((u) => u.id === id)
   if (!user) return undefined
-
   return { ...user, avatar: getRandomAvatar(user.id) }
 }
 
@@ -33,10 +31,19 @@ export const addUser = (user: Omit<User, "id">): User => {
   return { ...newUser, avatar: getRandomAvatar(newUser.id) }
 }
 
-// Function to delete a user by ID
 export const deleteUserById = (id: number): boolean => {
   const index = mockUsers.findIndex(u => u.id === id)
   if (index === -1) return false
   mockUsers.splice(index, 1)
   return true
+}
+
+export const updateUser = (id: number, updatedData: Omit<User, "id">): User | null => {
+  const index = mockUsers.findIndex(u => u.id === id)
+  if (index === -1) return null
+
+  const updatedUser = { ...mockUsers[index], ...updatedData }
+  mockUsers[index] = updatedUser
+
+  return { ...updatedUser, avatar: getRandomAvatar(updatedUser.id) }
 }
