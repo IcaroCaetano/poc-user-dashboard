@@ -1,6 +1,7 @@
 import { GetServerSideProps } from "next"
 import { getUsers } from "../services/userService"
 import { User } from "../types/User"
+import { UserCard } from "@/components/UserCard"
 import Link from "next/link"
 
 interface Props {
@@ -23,12 +24,7 @@ export default function Home({ users, page }: Props) {
       <ul className="space-y-4">
         {users.map((user) => (
           <li key={user.id}>
-            <Link
-              href={`/users/${user.id}`}
-              className="block p-4 border rounded-lg shadow hover:bg-gray-50 transition"
-            >
-              {user.name}
-            </Link>
+            <UserCard user={user} />
           </li>
         ))}
       </ul>
@@ -41,7 +37,9 @@ export default function Home({ users, page }: Props) {
           >
             ⬅️ Previous
           </Link>
-        ) : <div />}
+        ) : (
+          <div />
+        )}
 
         <Link
           href={`/?page=${page + 1}`}

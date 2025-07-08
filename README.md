@@ -4,8 +4,9 @@ This project is a simple Proof of Concept (POC) for a user dashboard built with 
 
 ---
 
-![User Dashboard Screenshot](public/PrintScreen_User.png)
+![User Dashboard Screenshot](public/PrintScreen_User.png) ![User Dashboard Screenshot](public/PrintScreen_User2.png)
 
+![User Dashboard Screenshot](public/PrintScreen_PagePrincipal.png)
 
 ## Features Implemented
 
