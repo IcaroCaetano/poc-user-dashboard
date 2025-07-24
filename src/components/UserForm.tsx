@@ -1,82 +1,71 @@
+import { useState, FormEvent } from "react"
 import { User } from "@/types/User"
-import {
-  UseFormRegister,
-  FieldErrors,
-  UseFormHandleSubmit,
-  SubmitHandler,
-} from "react-hook-form"
-import { FormEvent } from "react"
+import * as styles from "./UserForm/UserForm.styles"
 
-export interface UserFormProps<TFormValues = any> {
+interface UserFormProps {
   initialUser?: Partial<User>
-  onSubmit: (data: TFormValues) => void
+  onSubmit: (userData: Omit<User, "id" | "avatar">) => void
   submitLabel?: string
-
-  register?: UseFormRegister<TFormValues>
-  errors?: FieldErrors<TFormValues>
-  handleSubmit?: UseFormHandleSubmit<TFormValues>
 }
 
-export function UserForm<TFormValues = any>({
-  initialUser,
-  onSubmit,
-  submitLabel = "Save",
-  register,
-  errors,
-  handleSubmit,
-}: UserFormProps<TFormValues>) {
-  const internalSubmit = handleSubmit
-    ? handleSubmit(onSubmit as SubmitHandler<TFormValues>)
-    : (e: FormEvent) => {
-        e.preventDefault()
-        onSubmit({} as TFormValues)
-      }
+export function UserForm({ initialUser, onSubmit, submitLabel = "Save" }: UserFormProps) {
+  const [name, setName] = useState(initialUser?.name ?? "")
+  const [email, setEmail] = useState(initialUser?.email ?? "")
+  const [phone, setPhone] = useState(initialUser?.phone ?? "")
+  const [website, setWebsite] = useState(initialUser?.website ?? "")
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault()
+    onSubmit({ name, email, phone, website })
+  }
 
   return (
-    <form onSubmit={internalSubmit} noValidate>
+    <form onSubmit={handleSubmit} className={styles.formWrapper}>
       <div>
-        <label>Name</label>
+        <label className={styles.label}>Name</label>
         <input
           type="text"
-          defaultValue={(initialUser as any)?.name}
-          {...(register ? register("name") : {})}
-          required={!register}
+          value={name}
+          onChange={e => setName(e.target.value)}
+          required
+          className={styles.input}
         />
-        {errors?.name && <p>{(errors.name as any)?.message}</p>}
       </div>
 
       <div>
-        <label>Email</label>
+        <label className={styles.label}>Email</label>
         <input
           type="email"
-          defaultValue={(initialUser as any)?.email}
-          {...(register ? register("email") : {})}
-          required={!register}
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          required
+          className={styles.input}
         />
-        {errors?.email && <p>{(errors.email as any)?.message}</p>}
       </div>
 
       <div>
-        <label>Phone</label>
+        <label className={styles.label}>Phone</label>
         <input
           type="tel"
-          defaultValue={(initialUser as any)?.phone}
-          {...(register ? register("phone") : {})}
-          required={!register}
+          value={phone}
+          onChange={e => setPhone(e.target.value)}
+          className={styles.input}
         />
-        {errors?.phone && <p>{(errors.phone as any)?.message}</p>}
       </div>
 
       <div>
-        <label>Website (optional)</label>
+        <label className={styles.label}>Website</label>
         <input
           type="url"
-          defaultValue={(initialUser as any)?.website}
-          {...(register ? register("website") : {})}
+          value={website}
+          onChange={e => setWebsite(e.target.value)}
+          className={styles.input}
         />
       </div>
 
-      <button type="submit">{submitLabel}</button>
+      <button type="submit" className={styles.button}>
+        {submitLabel}
+      </button>
     </form>
   )
 }
