@@ -3,7 +3,7 @@ import { getUserById, updateUser } from "@/services/userService"
 import { User } from "@/types/User"
 import { useRouter } from "next/router"
 import Link from "next/link"
-import { UserForm } from "@/components/UserForm"
+import { UserForm } from "@/components/UserForm/UserForm"
 
 interface Props {
   user: User | null

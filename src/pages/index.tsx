@@ -1,7 +1,7 @@
 import { GetServerSideProps } from "next"
 import { getUsers } from "../services/userService"
 import { User } from "../types/User"
-import { UserCard } from "@/components/UserCard"
+import { UserCard } from "@/components/UserCard/UserCard"
 import Link from "next/link"
 
 interface Props {

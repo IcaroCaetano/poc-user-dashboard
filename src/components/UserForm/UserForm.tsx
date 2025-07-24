@@ -1,6 +1,6 @@
 import { useState, FormEvent } from "react"
 import { User } from "@/types/User"
-import * as styles from "./UserForm/UserForm.styles"
+import * as styles from "./UserForm.styles"
 
 interface UserFormProps {
   initialUser?: Partial<User>
