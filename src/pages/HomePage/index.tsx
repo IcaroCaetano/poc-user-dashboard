@@ -15,7 +15,7 @@ export default function Home({ users, page }: Props) {
     <div className={homePageStyles.container}>
       <h1 className={homePageStyles.title}>Users - Page {page}</h1>
 
-      <Link href="/add-user" className={homePageStyles.addUserButton}>
+      <Link href="/AddUserPage" className={homePageStyles.addUserButton}>
         ➕ Add User
       </Link>
 
