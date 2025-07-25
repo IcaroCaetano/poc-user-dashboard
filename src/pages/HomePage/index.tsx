@@ -29,14 +29,14 @@ export default function Home({ users, page }: Props) {
 
       <div className={homePageStyles.paginationWrapper}>
         {page > 1 ? (
-          <Link href={`/?page=${page - 1}`} className={homePageStyles.paginationLink}>
+          <Link href={`/HomePage?page=${page - 1}`} className={homePageStyles.paginationLink}>
             ⬅️ Previous
           </Link>
         ) : (
           <div />
         )}
 
-        <Link href={`/?page=${page + 1}`} className={homePageStyles.paginationLink}>
+        <Link href={`/HomePage?page=${page + 1}`} className={homePageStyles.paginationLink}>
           Next ➡️
         </Link>
       </div>
