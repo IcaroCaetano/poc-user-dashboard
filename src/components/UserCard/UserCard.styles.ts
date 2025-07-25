@@ -1,11 +1,5 @@
 /**
  * Utility styles for the UserCard component.
- *
- * @property wrapper   Main container of the user card.
- * @property container Inner container that aligns the avatar and user info.
- * @property avatar    Styling for the user's avatar image.
- * @property name      Styling for the user's name text.
- * @property email     Styling for the user's email text.
  */
 export const userCard = {
   /** Main container of the user card */

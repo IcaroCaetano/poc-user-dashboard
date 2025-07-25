@@ -1,5 +1,5 @@
-// components/SearchBar.tsx
 import React, { useState } from "react"
+import { searchBar } from "./SearchBar.styles"
 
 type Props = {
   onSearch: (query: string) => void
@@ -14,18 +14,15 @@ export const SearchBar: React.FC<Props> = ({ onSearch }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mb-4">
+    <form onSubmit={handleSubmit} className={searchBar.form}>
       <input
         type="text"
         value={input}
         onChange={e => setInput(e.target.value)}
         placeholder="Search by name or email"
-        className="border p-2 rounded w-64"
+        className={searchBar.input}
       />
-      <button
-        type="submit"
-        className="ml-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-      >
+      <button type="submit" className={searchBar.button}>
         Search
       </button>
     </form>
