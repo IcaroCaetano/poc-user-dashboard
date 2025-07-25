@@ -4,6 +4,7 @@ import { User } from "@/types/User"
 import { useRouter } from "next/router"
 import Link from "next/link"
 import { UserForm } from "@/components/UserForm/UserForm"
+import { editUserStyles } from "./EditUser.styles"
 
 interface Props {
   user: User | null
@@ -14,7 +15,7 @@ export default function EditUser({ user }: Props) {
 
   if (!user) {
     return (
-      <div className="p-6">
+      <div className={editUserStyles.notFoundContainer}>
         <p>User not found.</p>
         <Link href="/">⬅ Back</Link>
       </div>
@@ -33,8 +34,8 @@ export default function EditUser({ user }: Props) {
   }
 
   return (
-    <div className="max-w-xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Edit User</h1>
+    <div className={editUserStyles.container}>
+      <h1 className={editUserStyles.title}>Edit User</h1>
       <UserForm initialUser={user} onSubmit={handleSubmit} submitLabel="Save" />
     </div>
   )
