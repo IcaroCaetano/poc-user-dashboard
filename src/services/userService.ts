@@ -12,11 +12,27 @@ const mockUsers: User[] = Array.from({ length: 25 }, (_, i) => ({
 const getRandomAvatar = (id: number) =>
   `https://randomuser.me/api/portraits/lego/${id % 10}.jpg`
 
-export const getUsers = (page = 1, limit = 5): User[] => {
+export const getUsers = (
+  page = 1,
+  limit = 5,
+  query?: string
+): User[] => {
+  const normalizedQuery = query?.toLowerCase() || ""
+
+  const filteredUsers = query
+    ? mockUsers.filter(user =>
+        user.name.toLowerCase().includes(normalizedQuery) ||
+        user.email.toLowerCase().includes(normalizedQuery)
+      )
+    : mockUsers
+
   const start = (page - 1) * limit
-  return mockUsers
-    .slice(start, start + limit)
-    .map(user => ({ ...user, avatar: getRandomAvatar(user.id) }))
+  const paginatedUsers = filteredUsers.slice(start, start + limit)
+
+  return paginatedUsers.map(user => ({
+    ...user,
+    avatar: getRandomAvatar(user.id)
+  }))
 }
 
 export const getUserById = (id: number): User | undefined => {
@@ -46,4 +62,14 @@ export const updateUser = (id: number, updatedData: Omit<User, "id">): User | nu
   mockUsers[index] = updatedUser
 
   return { ...updatedUser, avatar: getRandomAvatar(updatedUser.id) }
+}
+
+export const searchUsers = (query: string): User[] => {
+  const normalizedQuery = query.toLowerCase()
+  return mockUsers
+    .filter(user =>
+      user.name.toLowerCase().includes(normalizedQuery) ||
+      user.email.toLowerCase().includes(normalizedQuery)
+    )
+    .map(user => ({ ...user, avatar: getRandomAvatar(user.id) }))
 }
