@@ -26,17 +26,17 @@ export default function Home({ users, page, search }: Props) {
     <div className={homePageStyles.container}>
       <h1 className={homePageStyles.title}>Users - Page {page}</h1>
 
-      <form onSubmit={handleSearch} className="mb-4 flex gap-2">
+      <form onSubmit={handleSearch} className={homePageStyles.searchForm}>
         <input
           type="text"
           placeholder="Search by name or email"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
-          className="border px-3 py-2 rounded w-full"
+          className={homePageStyles.searchInput}
         />
         <button
           type="submit"
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+          className={homePageStyles.searchButton}
         >
           Search
         </button>
