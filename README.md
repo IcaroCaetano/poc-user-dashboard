@@ -46,18 +46,43 @@ This project is a simple Proof of Concept (POC) for a user dashboard built with 
 
 ```
 src/
+├── components/
+│   ├── SearchBar/
+│   │   ├── SearchBar.tsx
+│   │   └── SearchBar.styles.ts
+│   ├── UserCard/
+│   │   ├── UserCard.tsx
+│   │   └── UserCard.styles.ts
+│   └── UserForm/
+│       ├── UserForm.tsx
+│       └── UserForm.styles.ts
+│
 ├── pages/
-│ ├── index.tsx # User list page with pagination
-│ └── users/
-│ └── [id]/
-│ ├── index.tsx # User detail page
-│ └── edit.tsx # User edit page
+│   ├── AboutPage/
+│   │   ├── index.tsx
+│   │   └── AboutPage.styles.ts
+│   ├── AddUserPage/
+│   │   ├── index.tsx
+│   │   └── AddUserPage.styles.ts
+│   ├── HomePage/
+│   │   ├── index.tsx
+│   │   └── HomePage.styles.ts
+│   └── users/
+│       └── [id]/
+│           ├── edit.tsx
+│           ├── index.tsx
+│           ├── EditUser.styles.ts
+│           └── UserDetail.styles.ts
+│
 ├── services/
-│ └── userService.ts # Mock user data service with CRUD functions
+│   └── userService.ts
+│
 ├── types/
-│ └── User.ts # User TypeScript type definition
+│   └── User.ts
+│
 └── styles/
-└── globals.css # Global styles including Tailwind imports
+    └── globals.css
+
 ````
 
 ## Getting Started
